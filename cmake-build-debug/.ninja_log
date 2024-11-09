@@ -1,0 +1,27 @@
+# ninja log v5
+17	1869	7528703865858728	CMakeFiles/Genetic_algorithms.dir/main.cpp.obj	a9fbf421d4633c23
+2304	2594	7528703873057313	Genetic_algorithms.exe	3e8db9535e4dafa5
+32	2304	7528703870179107	CMakeFiles/Genetic_algorithms.dir/GeneticAlgorithm/GeneticAlgorithm.cpp.obj	ad00c12024b2e95d
+26	1751	7528703864675701	CMakeFiles/Genetic_algorithms.dir/Chromosome/Chromosome.cpp.obj	2bea35e45786f68c
+12	477	7528013142523363	CMakeFiles/Genetic_algorithms.dir/GenericAlgorithm/GenericAlgorithm.cpp.obj	8ecb838e94e38a33
+39	1650	7528703863634789	CMakeFiles/Genetic_algorithms.dir/Utilities/StaticData.cpp.obj	7e15bda648265fb
+38	1679	7528704066389662	CMakeFiles/Genetic_algorithms.dir/Utilities/StaticData.cpp.obj	7e15bda648265fb
+24	1729	7528704066924653	CMakeFiles/Genetic_algorithms.dir/Chromosome/Chromosome.cpp.obj	2bea35e45786f68c
+16	1881	7528704068449601	CMakeFiles/Genetic_algorithms.dir/main.cpp.obj	a9fbf421d4633c23
+31	2345	7528704073052178	CMakeFiles/Genetic_algorithms.dir/GeneticAlgorithm/GeneticAlgorithm.cpp.obj	ad00c12024b2e95d
+2345	2604	7528704075603555	Genetic_algorithms.exe	3e8db9535e4dafa5
+41	1695	7528704184114274	CMakeFiles/Genetic_algorithms.dir/Utilities/StaticData.cpp.obj	7e15bda648265fb
+26	1707	7528704184243159	CMakeFiles/Genetic_algorithms.dir/Chromosome/Chromosome.cpp.obj	2bea35e45786f68c
+16	1857	7528704185739393	CMakeFiles/Genetic_algorithms.dir/main.cpp.obj	a9fbf421d4633c23
+33	2341	7528704190560377	CMakeFiles/Genetic_algorithms.dir/GeneticAlgorithm/GeneticAlgorithm.cpp.obj	ad00c12024b2e95d
+2341	2607	7528704193186942	Genetic_algorithms.exe	3e8db9535e4dafa5
+42	1608	7528704344811950	CMakeFiles/Genetic_algorithms.dir/Utilities/StaticData.cpp.obj	7e15bda648265fb
+27	1681	7528704345546283	CMakeFiles/Genetic_algorithms.dir/Chromosome/Chromosome.cpp.obj	2bea35e45786f68c
+19	1798	7528704346704807	CMakeFiles/Genetic_algorithms.dir/main.cpp.obj	a9fbf421d4633c23
+35	2346	7528704352164786	CMakeFiles/Genetic_algorithms.dir/GeneticAlgorithm/GeneticAlgorithm.cpp.obj	ad00c12024b2e95d
+2346	2608	7528704354715855	Genetic_algorithms.exe	3e8db9535e4dafa5
+37	1643	7528704549848714	CMakeFiles/Genetic_algorithms.dir/Utilities/StaticData.cpp.obj	7e15bda648265fb
+22	1674	7528704550182038	CMakeFiles/Genetic_algorithms.dir/Chromosome/Chromosome.cpp.obj	2bea35e45786f68c
+13	1897	7528704552409157	CMakeFiles/Genetic_algorithms.dir/main.cpp.obj	a9fbf421d4633c23
+30	2321	7528704556640425	CMakeFiles/Genetic_algorithms.dir/GeneticAlgorithm/GeneticAlgorithm.cpp.obj	ad00c12024b2e95d
+2321	2641	7528704559795799	Genetic_algorithms.exe	3e8db9535e4dafa5
