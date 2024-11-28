@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Floating_Point_GA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Floating_Point_GA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Floating_Point_GA-Debug-d57f05add97a41e5fca0.json",
+					"name" : "Floating_Point_GA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Helpers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Helpers-Debug-b905f330f30c9aa02093.json",
+					"name" : "Helpers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MainAlgorithm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MainAlgorithm-Debug-4b969f867ba0ee1dc692.json",
+					"name" : "MainAlgorithm",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dataset::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dataset-Debug-d4612734748a66864709.json",
+					"name" : "dataset",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "K:/Kareem's/Programming vol.3/Github/Genetic algorithms/Genetic-algorithms/Floating Point GA/cmake-build-debug",
+		"source" : "K:/Kareem's/Programming vol.3/Github/Genetic algorithms/Genetic-algorithms/Floating Point GA"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
