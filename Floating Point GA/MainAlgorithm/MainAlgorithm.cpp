@@ -1,14 +1,31 @@
+#include <algorithm>
 #include <float.h>
 
 #include "../MainLibrary.h"
 
-const int MX_GENERATION = 50;
-const int POPULATION_SIZE = 20;
+const int MX_GENERATION = 100;
+const int POPULATION_SIZE = 500;
+const int K_BEST = 100;
 
 std::vector<Chromosome> offsprings;
 std::vector<Chromosome> parents;
 Dataset dataset;
 
+
+bool isValidDataset()
+{
+    if(dataset.num_chemicals != dataset.cost_coefficients.size()) return false;
+
+    float sum = std::accumulate(dataset.upper_bounds.begin(), dataset.upper_bounds.end(), 0.0f) ;
+    if (sum < dataset.total_proportion)
+        return false;
+
+    sum = std::accumulate(dataset.lower_bounds.begin(), dataset.lower_bounds.end(), 0.0f) ;
+    if (sum > dataset.total_proportion) return false;
+
+    return true;
+
+}
 
 // ----------- Eval Fitness -----------------
 float evaluate_fitness(Chromosome& c)
@@ -36,7 +53,6 @@ void generate_intital_population()
         }
         adjust_proportions(c.proportions, dataset);
         parents.push_back(c);
-
     }
 
     // for (auto& c : population)
@@ -81,28 +97,25 @@ void crossover()
     const int n = offsprings.size();
     int p1 = generateRandomInt(0, n - 1);
     int p2 = generateRandomInt(0, n - 1);
-    if(p1 < p2) std::swap(p1, p2);
+    if (p1 < p2) std::swap(p1, p2);
 
-    int idx1 = generateRandomInt(0, n -1);
+    int idx1 = generateRandomInt(0, n - 1);
     int idx2;
     do
     {
-        idx2 = generateRandomInt(0, n-1);
-
+        idx2 = generateRandomInt(0, n - 1);
     }
     while (idx2 != idx1);
-
 
 
     Chromosome& parent1 = offsprings[idx1];
     Chromosome& parent2 = offsprings[idx2];
 
 
-
-    while(p1 < p2)
+    while (p1 < p2)
     {
         std::swap(parent1.proportions[p1], parent2.proportions[p1]);
-        p1 ++ ;
+        p1++;
     }
 
     adjust_proportions(parent1.proportions, dataset);
@@ -113,24 +126,24 @@ void crossover()
 void mutate(int current_generation)
 {
     const int n = offsprings.size() - 1;
-    int idx = generateRandomInt(0, n) ;
+    int idx = generateRandomInt(0, n);
 
-    Chromosome& c = offsprings[idx] ;
+    Chromosome& c = offsprings[idx];
     int chromosomeLength = dataset.num_chemicals;
-    float r = generateRandomFloat(0,1);
+    float r = generateRandomFloat(0, 1);
     int b = generateRandomInt(1, 5);
 
 
-    for(int i = 0 ; i < chromosomeLength ; i ++)
+    for (int i = 0; i < chromosomeLength; i++)
     {
         float delta_lb = c.proportions[i] - dataset.lower_bounds[i];
         float delta_ub = dataset.upper_bounds[i] - c.proportions[i];
 
-        float r1 = generateRandomFloat(0,1);
-        float y =  (r1 <= 0.5f) ? delta_lb : delta_ub ;
+        float r1 = generateRandomFloat(0, 1);
+        float y = (r1 <= 0.5f) ? delta_lb : delta_ub;
 
-        float pwr = powf((1 - current_generation/ MX_GENERATION), b);
-        float val = y * (1 - powf(r,pwr));
+        float pwr = powf((1 - current_generation / MX_GENERATION), b);
+        float val = y * (1 - powf(r, pwr));
 
 
         c.proportions[i] += val;
@@ -141,49 +154,59 @@ void mutate(int current_generation)
 // ----------------- replace (elitist replacement) ------------------
 void replace()
 {
-    const int n  = offsprings.size();
-    for(int i = 0 ; i < n ; i ++)
+    std::vector<std::pair<int, int>> bestChromosomes;
+    const int n = parents.size();
+    for (int i = 0; i < n; i++)
     {
-        float parentFitness = evaluate_fitness(parents[i]);
-        float offspringFitness = evaluate_fitness(offsprings[i]);
+        bestChromosomes.emplace_back(evaluate_fitness(parents[i]), i);
+    }
 
+    sort(bestChromosomes.begin(), bestChromosomes.end());
+    for (int i = 0; i < std::min(K_BEST, n); i++)
+    {
+        int idx = bestChromosomes[i].second;
+        float parentFitness = evaluate_fitness(parents[idx]);
+        float offspringFitness = evaluate_fitness(offsprings[idx]);
 
         // Minimize cost;
         if (parentFitness < offspringFitness)
-            offsprings[i] = parents[i];
+            offsprings[idx] = parents[idx];
     }
-
 }
+
 Chromosome getTheBest()
 {
     float fitness = FLT_MAX;
-    Chromosome c ;
+    Chromosome c;
 
-    for(auto& indv : parents)
+    for (auto& indv : parents)
         if (evaluate_fitness(indv) < fitness)
             c = indv;
 
-    return  c;
-
+    return c;
 }
+
 void output(std::string& out)
 {
     Chromosome c = getTheBest();
     out += ("Chemical Proportions: ");
-    for(auto& prop : c.proportions)
+    for (auto& prop : c.proportions)
         out += (std::to_string(prop) + " ");
     out += ("\nTotal Cost: ");
     out += (std::to_string(evaluate_fitness(c)));
     out += "\n======================================================\n";
-
-
 }
+
 void run(const Dataset& ds, std::string& out)
 {
     dataset = ds;
-
+    if (!isValidDataset())
+    {
+        out += "DATASET NOT VALID\n";
+        return;
+    }
     generate_intital_population();
-    for(int g = 0 ; g < MX_GENERATION ; g ++)
+    for (int g = 0; g < MX_GENERATION; g++)
     {
         select();
         crossover();
@@ -194,5 +217,4 @@ void run(const Dataset& ds, std::string& out)
         offsprings.clear();
     }
     output(out);
-
 }

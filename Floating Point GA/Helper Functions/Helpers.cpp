@@ -6,6 +6,7 @@
 
 #define LOWER_BOUND (0.0)
 #define UPPER_BOUND (1e8)
+#define PRECISION (0.00001f)
 
 
 void writeToFile(std::string str) {
@@ -38,7 +39,7 @@ float generateRandomFloat(float lowerBound = LOWER_BOUND, float upperBound = UPP
     static std::mt19937 gen(rd());
 
     std::uniform_real_distribution<float> dis(lowerBound, upperBound);
-    return std::round(dis(gen) * 100.0f) / 100.0f;
+    return std::round(dis(gen) * 1000.0f) / 1000.0f;
 }
 
 void _clamp(float& proportion, float lower_bound, float upper_bound)
@@ -50,8 +51,8 @@ void _clamp(float& proportion, float lower_bound, float upper_bound)
 }
 std::vector<float> adjust_proportions(std::vector<float>& proportions, const Dataset& dataset)
 {
-    std::setprecision(5);
-    const int n = dataset.lower_bounds.size();
+    const int n = proportions.size();
+
     float sum = 0.0f;
     for(int i = 0 ; i < proportions.size() ; i ++)
     {
@@ -60,17 +61,16 @@ std::vector<float> adjust_proportions(std::vector<float>& proportions, const Dat
     }
 
     float diff = dataset.total_proportion - sum;
-    // if (diff == 0) return proportions;
 
-
-    if (diff > 0.001f)
+    if (diff > PRECISION )
     {
         // sum needs to be maxmized
         int i = 0 ;
-        while(diff > 0.001f){
+        while(diff > PRECISION){
 
             float distToUpperBound = dataset.upper_bounds[i] - proportions[i];
             float increaseValue = generateRandomFloat(0, distToUpperBound);
+
             increaseValue = std::min(increaseValue, diff);
 
 
@@ -81,11 +81,11 @@ std::vector<float> adjust_proportions(std::vector<float>& proportions, const Dat
             i  =(i + 1) % n;
         }
 
-    }else if (diff < 0.001f)
+    }else if (diff < PRECISION)
     {
         // sum needs to be minimized
         int i = 0 ;
-        while(diff < -0.001f){
+        while(diff < -PRECISION){
             float distToLowerBound = proportions[i] - dataset.lower_bounds[i];
             float decreaseValue = generateRandomFloat(0, distToLowerBound);
             decreaseValue = std::min(decreaseValue, -diff);

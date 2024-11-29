@@ -11,7 +11,7 @@ int main()
     string output ;
     for(int i = 0 ; i < datasets.size() ; i ++)
     {
-        auto& dataset = datasets[0];
+        auto& dataset = datasets[i];
         output += ("Dataset " + to_string(i + 1) + "\n");
         run(dataset, output);
     }
